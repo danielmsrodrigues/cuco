@@ -10,8 +10,11 @@ Por omissão é só uma notificação. O ecrã inteiro existe, mas só se o pedi
 
 ## Instalação rápida
 
-Precisas de macOS 13 ou superior e das ferramentas de linha de comandos da Apple
-(`xcode-select --install`).
+Precisas de macOS 13 ou superior, das ferramentas de linha de comandos da Apple
+(`xcode-select --install`) e de um certificado **Apple Development** no keychain —
+se nunca abriste o Xcode, abre-o uma vez e inicia sessão com o teu Apple ID em
+Settings → Accounts, que ele cria um. Sem o certificado a app compila e instala na
+mesma, mas fica muda: o macOS não entrega notificações a apps assinadas ad-hoc.
 
 ```bash
 git clone https://github.com/danielmsrodrigues/cuco.git
@@ -28,10 +31,10 @@ Para compilar sem instalar, corre `./build.sh` e fica em `build/Cuco.app`.
 ### Sobre a assinatura
 
 O `build.sh` assina com o primeiro certificado **Apple Development** do teu
-keychain. Não é vaidade: o macOS recusa notificações a apps assinadas ad-hoc,
-sem sequer mostrar o pedido de permissão. Se não tiveres nenhum certificado, abre
-o Xcode uma vez e inicia sessão com o teu Apple ID (Settings → Accounts), que ele
-cria um.
+keychain. Não é vaidade: o macOS recusa notificações a apps assinadas ad-hoc, sem
+sequer mostrar o pedido de permissão — o `requestAuthorization` devolve logo um
+erro. Sem certificado, o script avisa-te e assina ad-hoc à mesma, para poderes
+experimentar o resto.
 
 ## O que a app faz
 
